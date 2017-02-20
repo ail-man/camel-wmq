@@ -70,26 +70,26 @@
             <version>${camel.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>mq</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>mqjms</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>jmqi</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>dhbcore</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.ibm.mq</groupId>-->
+            <!--<artifactId>mq</artifactId>-->
+            <!--<version>${ibm.mq.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.ibm.mq</groupId>-->
+            <!--<artifactId>mqjms</artifactId>-->
+            <!--<version>${ibm.mq.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.ibm.mq</groupId>-->
+            <!--<artifactId>jmqi</artifactId>-->
+            <!--<version>${ibm.mq.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.ibm.mq</groupId>-->
+            <!--<artifactId>dhbcore</artifactId>-->
+            <!--<version>${ibm.mq.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>javax.jms</groupId>

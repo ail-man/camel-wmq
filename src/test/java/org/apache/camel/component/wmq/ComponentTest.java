@@ -13,16 +13,16 @@ public class ComponentTest extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
-        context.addComponent("wmq", newWmqComponent("test", 1514, "TEST1", "SYSTEM.DEF.SVRCONN")
+        context.addComponent("wmq", newWmqComponent("mint", 1414, "MQTest", "HPT5.CLNT.WL")
                                         .excludeRFHeaders());
         return context;
     }
 
     @Test
     public void send_and_receive() throws Exception {
-        template().sendBodyAndHeader("wmq:PROVA.TEST1?username=mqm&password=mqm", "aMessage", "JMS_IBM_MQMD_ApplIdentityData", "anyIdData");
+        template().sendBodyAndHeader("wmq:MQTestQueue?username=mquser&password=mquser", "aMessage", "JMS_IBM_MQMD_ApplIdentityData", "anyIdData");
 
-        Exchange received = consumer().receive("wmq:PROVA.TEST1?username=mqm&password=mqm");
+        Exchange received = consumer().receive("wmq:MQTestQueue?username=mquser&password=mquser");
         Message in = received.getIn();
 
         assertEquals("aMessage", in.getBody());
