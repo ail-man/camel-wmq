@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.apache.camel</groupId>
 	<artifactId>camel-wmq</artifactId>
-	<version>2.18.2-SNAPSHOT</version>
-	<packaging>bundle</packaging>
+	<version>2.17.5-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>camel-wmq</name>
+
+	<scm>
+		<url>${git.url}:sbrf-java-commons/ru.bpc.sbrf.common.svfe.git</url>
+		<connection>scm:git:${project.scm.url}</connection>
+		<developerConnection>${project.scm.connection}</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<camel.version>2.17.5</camel.version>
 		<ibm.mq.version>8.0.0.4</ibm.mq.version>
 	</properties>
@@ -17,28 +24,6 @@
 	<prerequisites>
 		<maven>3.0</maven>
 	</prerequisites>
-
-	<repositories>
-		<repository>
-			<id>central</id>
-			<url>http://maven.paros.local:8080/content/repositories/central/</url>
-		</repository>
-		<repository>
-			<id>thirdParty</id>
-			<url>http://maven.paros.local:8080/content/repositories/thirdparty/</url>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://maven.paros.local:8080/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>releases</id>
-			<url>http://maven.paros.local:8080/content/repositories/releases/</url>
-		</repository>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -106,47 +91,13 @@
 			<groupId>javax.jms</groupId>
 			<artifactId>javax.jms-api</artifactId>
 			<version>2.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.4.0</version>
-				<inherited>true</inherited>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Export-Package>
-							org.apache.camel.wmq*;version="${project.version}";-noimport:=true
-						</Export-Package>
-						<Import-Package>
-							org.apache.camel*;version="[2.3,3)",
-							*
-						</Import-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>alldep</shadedClassifierName>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -156,14 +107,40 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
 		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>2.6</version>
-			</extension>
-		</extensions>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus_release</id>
+			<name>Internal Releases</name>
+			<url>${nexus.release.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus_snapshot</id>
+			<name>Internal Snapshots</name>
+			<url>${nexus.snapshot.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
