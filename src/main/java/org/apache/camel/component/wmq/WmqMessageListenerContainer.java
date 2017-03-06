@@ -5,12 +5,12 @@ import org.apache.camel.component.jms.JmsEndpoint;
 
 public class WmqMessageListenerContainer extends DefaultJmsMessageListenerContainer {
 
-    public WmqMessageListenerContainer(JmsEndpoint endpoint) {
-        super(endpoint);
-        setConnectionFactory(endpoint.getConnectionFactory());
-        setDestinationName(endpoint.getDestinationName());
-        setDestinationResolver(endpoint.getDestinationResolver());
-        setConcurrentConsumers(endpoint.getConfiguration().getConcurrentConsumers());
-    }
+	public WmqMessageListenerContainer(JmsEndpoint endpoint) {
+		super(endpoint);
+		setConnectionFactory(endpoint.getConnectionFactory());
+		setDestinationName(endpoint.getDestinationName());
+		setDestinationResolver(endpoint.getDestinationResolver());
+		setConcurrentConsumers(endpoint.getConfiguration().getConcurrentConsumers());
+	}
 
 }
