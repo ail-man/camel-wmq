@@ -15,22 +15,24 @@ public class WmqComponent extends JmsComponent {
 	private final String hostname;
 	private final String channel;
 	private final Integer port;
+	private final String cipher;
 	private boolean excludeRFHeaders;
 
 	public WmqComponent() {
-		this(null, null, null, null);
+		this(null, null, null, null, null);
 	}
 
-	public WmqComponent(String hostname, Integer port, String queueManager, String channel) {
+	public WmqComponent(String hostname, Integer port, String queueManager, String channel, String cipher) {
 		super(WmqEndpoint.class);
 		this.queueManager = queueManager;
 		this.hostname = hostname;
 		this.channel = channel;
 		this.port = port;
+		this.cipher = cipher;
 	}
 
-	public static WmqComponent newWmqComponent(String hostname, Integer port, String queueManager, String channel) {
-		return new WmqComponent(hostname, port, queueManager, channel);
+	public static WmqComponent newWmqComponent(String hostname, Integer port, String queueManager, String channel, String cipher) {
+		return new WmqComponent(hostname, port, queueManager, channel, cipher);
 	}
 
 	public WmqComponent excludeRFHeaders() {
@@ -41,7 +43,7 @@ public class WmqComponent extends JmsComponent {
 	@Override
 	protected JmsConfiguration createConfiguration() {
 		JmsConfiguration configuration = new JmsConfiguration();
-		configuration.setConnectionFactory(new WmqConnectionFactory(hostname, port, queueManager, channel));
+		configuration.setConnectionFactory(new WmqConnectionFactory(hostname, port, queueManager, channel, cipher));
 		configuration.setDestinationResolver(new WmqDestinationResolver(excludeRFHeaders));
 		return configuration;
 	}
